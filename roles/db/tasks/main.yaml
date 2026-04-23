@@ -15,15 +15,14 @@
     - PyMySQL
     - cryptography
 # Step 4 check DB connection wehter root password is already set
-- name : check DB connection
-  community.mysql.mysql_info:
-    login_user: root
+- name: Get MySQL Info
+  community.mysql.mysql_info:    # 2 spaces
+    login_user: root             # 4 spaces (under module)
     login_password: "{{ mysql_root_password }}"
     login_host: "{{ host }}"
-    filter: yes
-    ignore_errors: yes
-  register: mysql_connection_output
-# Step 5 Print DB connection output
+  ignore_errors: yes             # 2 spaces (same as module)
+  register: mysql_connection_output  # 2 spaces (same as module)
+ # Step 5 Print DB connection output
 - name: DB output print
   ansible.builtin.debug:
     msg: "Output: {{mysql_connection_output}}" 
