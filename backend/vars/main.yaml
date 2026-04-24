@@ -1,3 +1,4 @@
 login_password: Root@321
 login_host : 172.31.40.35
 login_user: root
+DB_HOST: 172.31.40.35
