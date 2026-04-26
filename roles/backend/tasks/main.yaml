@@ -15,19 +15,12 @@
   ansible.builtin.user:
     name : expence
     state: present
-- name: create app directoy 
-  ansible.builtin.file:
-    path : /app
-    state: directory
-- name: donwload backend code
-  ansible.builtin.get_url:
-    url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
-    dest: /tmp/backend.zip
-- name: unzip backend.code to /app directly 
-  ansible.builtin.unarchive:
-    src: /tmp/backend.zip
-    dest: /app
-    remote_src: yes
+- name: run app pre-requisites
+  tags:
+  - deployment
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app-pre-req
 - name: Install Node.js dependencies
   ansible.builtin.command: npm install
   args:
@@ -53,6 +46,7 @@
 - name: system daemon reload 
   ansible.builtin.systemd_service:
     daemon_reload: true 
+
 - name: start and enable backend service
   ansible.builtin.service:
     name: backend
