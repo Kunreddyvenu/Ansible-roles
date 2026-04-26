@@ -11,10 +11,10 @@
     enabled: yes
 # Step 3 delete the default website directoy
 - name: app-pre-req
-  ansible.builtin.import_rule:
+  ansible.builtin.import_role:
     name: common
     tasks_from: app-pre-req
-    
+
 - name: copy backend conf
   ansible.builtin.template:
     src: expense.conf.j2
